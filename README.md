@@ -1,9 +1,9 @@
 # Laravel utils
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/Quadram/laravel-utils.svg?style=flat-square)](https://packagist.org/packages/Quadram/laravel-utils)
-[![Build Status](https://img.shields.io/travis/Quadram/laravel-utils/master.svg?style=flat-square)](https://travis-ci.org/Quadram/laravel-utils)
-[![Quality Score](https://img.shields.io/scrutinizer/g/Quadram/laravel-utils.svg?style=flat-square)](https://scrutinizer-ci.com/g/Quadram/laravel-utils)
-[![Total Downloads](https://img.shields.io/packagist/dt/Quadram/laravel-utils.svg?style=flat-square)](https://packagist.org/packages/Quadram/laravel-utils)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/quadramqs/laravel-utils.svg?style=flat-square)](https://packagist.org/packages/quadramqs/laravel-utils)
+[![Build Status](https://img.shields.io/travis/quadramqs/laravel-utils/master.svg?style=flat-square)](https://travis-ci.org/quadramqs/laravel-utils)
+[![Quality Score](https://img.shields.io/scrutinizer/g/quadramqs/laravel-utils.svg?style=flat-square)](https://scrutinizer-ci.com/g/quadramqs/laravel-utils)
+[![Total Downloads](https://img.shields.io/packagist/dt/quadramqs/laravel-utils.svg?style=flat-square)](https://packagist.org/packages/quadramqs/laravel-utils)
 
 This package gives you some helper classes and super charged boiler plate for new Laravel projects. We made this package to aim API Rest services for mobile apps plus a dashboard with standard functionality.
 
