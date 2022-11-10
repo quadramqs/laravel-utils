@@ -1,0 +1,40 @@
+<?php
+
+namespace Quadram\LaravelUtils\Http\Middleware;
+
+use Closure;
+use Illuminate\Support\Facades\App;
+use Quadram\LaravelUtils\Classes\Headers;
+
+class LocalizationMiddleware
+{
+
+    /**
+     * Check if the requested language exists in language
+     * @return bool
+     */
+    public function languageExists()
+    {
+        if (!Headers::header('language') || !config('laravel-utils.languages')) {
+            return false;
+        }
+
+        return in_array(Headers::header('language'), config('laravel-utils.languages'));
+    }
+
+    /**
+     * Handle an incoming request.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        $locale = $this->languageExists() ? Headers::header('language') : config('app.locale');
+
+        App::setLocale($locale);
+
+        return $next($request);
+    }
+}
