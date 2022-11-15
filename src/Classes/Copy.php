@@ -245,7 +245,7 @@ class Copy
             $path = resource_path() . '/lang/' . $language . '.json';
 
             if (!file_exists($path)) {
-                return;
+                break;
             }
 
             $copies = json_decode(file_get_contents($path), JSON_PRETTY_PRINT);
