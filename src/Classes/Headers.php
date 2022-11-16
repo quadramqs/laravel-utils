@@ -63,13 +63,21 @@ class Headers
     public static function getLanguage()
     {
         $language = self::header('language');
-        $appLanguages = config('laravel-utils.languages');
+        $languages = config('laravel-utils.languages');
+        $defaultLanguage = config('laravel-utils.default_language');
+        $languageOverride = config('laravel-utils.language_override');
 
-        if (!$language || !\in_array($language, $appLanguages, true)) {
-            return config('laravel-utils.default_language');
+        $languageOverrideKeys = array_keys(config('laravel-utils.language_override'));
+
+        if (!$language || !$languages) {
+            return $defaultLanguage;
         }
 
-        return $language;
+        if(in_array($language, $languageOverrideKeys)) {
+            return $languageOverride[$language];
+        }
+
+        return in_array($language, $languages) ? $language : $defaultLanguage;
     }
 
     /**
