@@ -3,37 +3,43 @@
 namespace Quadram\LaravelUtils\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Quadram\LaravelUtils\Classes\Headers;
 
 class LocalizationMiddleware
 {
 
-    /**
-     * Check if the requested language exists in language
-     * @return bool
-     */
-    public function languageExists()
+    public function getLocale()
     {
-        if (!Headers::header('language') || !config('laravel-utils.languages')) {
-            return false;
+        $language = Headers::header('language');
+        $languages = config('laravel-utils.languages');
+        $defaultLanguage = config('app.locale');
+        $languageOverride = config('laravel-utils.language_override');
+
+        $languageOverrideKeys = array_keys(config('laravel-utils.language_override'));
+
+        if (!$language || !$languages) {
+            return $defaultLanguage;
         }
 
-        return in_array(Headers::header('language'), config('laravel-utils.languages'));
+        if(in_array($language, $languageOverrideKeys)) {
+            return $languageOverride[$language];
+        }
+
+        return in_array($language, $languages) ? $language : $defaultLanguage;
     }
 
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
+     * @param Request $request
+     * @param Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        $locale = $this->languageExists() ? Headers::header('language') : config('app.locale');
-
-        App::setLocale($locale);
+        App::setLocale($this->getLocale());
 
         return $next($request);
     }

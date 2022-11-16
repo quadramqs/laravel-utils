@@ -26,6 +26,8 @@ return [
         'es',
         'en',
     ],
+    'language_override' => [
+    ],
     'default_language' => 'es',
     'api_default_per_page' => 15,
     'roles' => [
