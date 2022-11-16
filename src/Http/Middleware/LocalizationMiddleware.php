@@ -10,26 +10,6 @@ use Quadram\LaravelUtils\Classes\Headers;
 class LocalizationMiddleware
 {
 
-    public function getLocale()
-    {
-        $language = Headers::header('language');
-        $languages = config('laravel-utils.languages');
-        $defaultLanguage = config('app.locale');
-        $languageOverride = config('laravel-utils.language_override');
-
-        $languageOverrideKeys = array_keys(config('laravel-utils.language_override'));
-
-        if (!$language || !$languages) {
-            return $defaultLanguage;
-        }
-
-        if(in_array($language, $languageOverrideKeys)) {
-            return $languageOverride[$language];
-        }
-
-        return in_array($language, $languages) ? $language : $defaultLanguage;
-    }
-
     /**
      * Handle an incoming request.
      *
@@ -39,7 +19,7 @@ class LocalizationMiddleware
      */
     public function handle($request, Closure $next)
     {
-        App::setLocale($this->getLocale());
+        App::setLocale(Headers::getLanguage());
 
         return $next($request);
     }
